@@ -58,20 +58,21 @@ YYEncodingType YYEncodingGetType(const char *typeEncoding) {
     if (len == 0) return YYEncodingTypeUnknown | qualifier;
 
     switch (*type) {
-        case 'v': return YYEncodingTypeVoid | qualifier;
-        case 'B': return YYEncodingTypeBool | qualifier;
         case 'c': return YYEncodingTypeInt8 | qualifier;
-        case 'C': return YYEncodingTypeUInt8 | qualifier;
-        case 's': return YYEncodingTypeInt16 | qualifier;
-        case 'S': return YYEncodingTypeUInt16 | qualifier;
         case 'i': return YYEncodingTypeInt32 | qualifier;
-        case 'I': return YYEncodingTypeUInt32 | qualifier;
-        case 'l': return YYEncodingTypeInt32 | qualifier;
-        case 'L': return YYEncodingTypeUInt32 | qualifier;
+        case 's': return YYEncodingTypeInt16 | qualifier;
+        case 'l': return YYEncodingTypeLong | qualifier;
         case 'q': return YYEncodingTypeInt64 | qualifier;
+        case 'C': return YYEncodingTypeUInt8 | qualifier;
+        case 'I': return YYEncodingTypeUInt32 | qualifier;
+        case 'S': return YYEncodingTypeUInt16 | qualifier;
+        case 'L': return YYEncodingTypeULong | qualifier;
         case 'Q': return YYEncodingTypeUInt64 | qualifier;
         case 'f': return YYEncodingTypeFloat | qualifier;
         case 'd': return YYEncodingTypeDouble | qualifier;
+        case 'B': return YYEncodingTypeBool | qualifier;
+        case 'v': return YYEncodingTypeVoid | qualifier;
+        case 'b': return YYEncodingTypeBitField | qualifier;
         case 'D': return YYEncodingTypeLongDouble | qualifier;
         case '#': return YYEncodingTypeClass | qualifier;
         case ':': return YYEncodingTypeSEL | qualifier;

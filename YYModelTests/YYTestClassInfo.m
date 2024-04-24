@@ -131,8 +131,8 @@ typedef union yy_union{ char a; int b;} yy_union;
 #ifdef __LP64__
     XCTAssertEqual([self getType:info name:@"longValue"] & YYEncodingTypeMask, YYEncodingTypeInt64);
     XCTAssertEqual([self getType:info name:@"unsignedLongValue"] & YYEncodingTypeMask, YYEncodingTypeUInt64);
-    XCTAssertEqual(YYEncodingGetType("l") & YYEncodingTypeMask, YYEncodingTypeInt32); // long in 32 bit system
-    XCTAssertEqual(YYEncodingGetType("L") & YYEncodingTypeMask, YYEncodingTypeUInt32); // unsingle long in 32 bit system
+    XCTAssertEqual(YYEncodingGetType("l") & YYEncodingTypeMask, YYEncodingTypeLong); // long in 32 bit system
+    XCTAssertEqual(YYEncodingGetType("L") & YYEncodingTypeMask, YYEncodingTypeULong); // unsingle long in 32 bit system
 #else
     XCTAssertEqual([self getType:info name:@"longValue"] & YYEncodingTypeMask, YYEncodingTypeInt32);
     XCTAssertEqual([self getType:info name:@"unsignedLongValue"] & YYEncodingTypeMask, YYEncodingTypeUInt32);

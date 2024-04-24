@@ -65,7 +65,9 @@ static force_inline BOOL YYEncodingTypeIsCNumber(YYEncodingType type) {
         case YYEncodingTypeInt16:
         case YYEncodingTypeUInt16:
         case YYEncodingTypeInt32:
+        case YYEncodingTypeLong:
         case YYEncodingTypeUInt32:
+        case YYEncodingTypeULong:
         case YYEncodingTypeInt64:
         case YYEncodingTypeUInt64:
         case YYEncodingTypeFloat:
@@ -244,7 +246,7 @@ static force_inline NSDate *YYNSDateFromString(__unsafe_unretained NSString *str
 
 
 /// Get the 'NSBlock' class.
-static force_inline Class YYNSBlockClass() {
+static force_inline Class YYNSBlockClass(void) {
     static Class cls;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -269,7 +271,7 @@ static force_inline Class YYNSBlockClass() {
  
  length: 20/24/25
  */
-static force_inline NSDateFormatter *YYISODateFormatter() {
+static force_inline NSDateFormatter *YYISODateFormatter(void) {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -429,7 +431,9 @@ static force_inline id YYValueForMultiKeys(__unsafe_unretained NSDictionary *dic
             case YYEncodingTypeInt16:
             case YYEncodingTypeUInt16:
             case YYEncodingTypeInt32:
+            case YYEncodingTypeLong:
             case YYEncodingTypeUInt32:
+            case YYEncodingTypeULong:
             case YYEncodingTypeInt64:
             case YYEncodingTypeUInt64:
             case YYEncodingTypeFloat:
@@ -679,8 +683,14 @@ static force_inline NSNumber *ModelCreateNumberFromProperty(__unsafe_unretained 
         case YYEncodingTypeInt32: {
             return @(((int32_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
+        case YYEncodingTypeLong: {
+            return @(((long (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
+        }
         case YYEncodingTypeUInt32: {
             return @(((uint32_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
+        }
+        case YYEncodingTypeULong: {
+            return @(((unsigned long (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
         }
         case YYEncodingTypeInt64: {
             return @(((int64_t (*)(id, SEL))(void *) objc_msgSend)((id)model, meta->_getter));
@@ -735,9 +745,15 @@ static force_inline void ModelSetNumberToProperty(__unsafe_unretained id model,
         } break;
         case YYEncodingTypeInt32: {
             ((void (*)(id, SEL, int32_t))(void *) objc_msgSend)((id)model, meta->_setter, (int32_t)num.intValue);
-        }
+        } break;
+        case YYEncodingTypeLong: {
+            ((void (*)(id, SEL, long))(void *) objc_msgSend)((id)model, meta->_setter, (long)num.longValue);
+        } break;
         case YYEncodingTypeUInt32: {
             ((void (*)(id, SEL, uint32_t))(void *) objc_msgSend)((id)model, meta->_setter, (uint32_t)num.unsignedIntValue);
+        } break;
+        case YYEncodingTypeULong: {
+            ((void (*)(id, SEL, unsigned long))(void *) objc_msgSend)((id)model, meta->_setter, (unsigned long)num.unsignedLongValue);
         } break;
         case YYEncodingTypeInt64: {
             if ([num isKindOfClass:[NSDecimalNumber class]]) {
@@ -1062,9 +1078,9 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
                 
             case YYEncodingTypeBlock: {
                 if (isNull) {
-                    ((void (*)(id, SEL, void (^)()))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)())NULL);
+                    ((void (*)(id, SEL, void (^)(void)))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)(void))NULL);
                 } else if ([value isKindOfClass:YYNSBlockClass()]) {
-                    ((void (*)(id, SEL, void (^)()))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)())value);
+                    ((void (*)(id, SEL, void (^)(void)))(void *) objc_msgSend)((id)model, meta->_setter, (void (^)(void))value);
                 }
             } break;
                 
@@ -1561,22 +1577,42 @@ static NSString *ModelDescription(NSObject *model) {
                     bool num = ((bool (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, bool))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt8:
+                case YYEncodingTypeInt8: {
+                    int8_t num = ((int8_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, int8_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
                 case YYEncodingTypeUInt8: {
-                    uint8_t num = ((bool (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    uint8_t num = ((uint8_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint8_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt16:
+                case YYEncodingTypeInt16: {
+                    int16_t num = ((int16_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, int16_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
                 case YYEncodingTypeUInt16: {
                     uint16_t num = ((uint16_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint16_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt32:
+                case YYEncodingTypeInt32: {
+                    int32_t num = ((int32_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, int32_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
+                case YYEncodingTypeLong: {
+                    long num = ((long (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, long))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
+                case YYEncodingTypeULong: {
+                    unsigned long num = ((unsigned long (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, unsigned long))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
                 case YYEncodingTypeUInt32: {
                     uint32_t num = ((uint32_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint32_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
                 } break;
-                case YYEncodingTypeInt64:
+                case YYEncodingTypeInt64: {
+                    int64_t num = ((int64_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
+                    ((void (*)(id, SEL, int64_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
+                } break;
                 case YYEncodingTypeUInt64: {
                     uint64_t num = ((uint64_t (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyMeta->_getter);
                     ((void (*)(id, SEL, uint64_t))(void *) objc_msgSend)((id)one, propertyMeta->_setter, num);
