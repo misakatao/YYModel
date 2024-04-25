@@ -47,23 +47,23 @@ typedef NS_OPTIONS(NSUInteger, YYEncodingType) {
     YYEncodingTypeBitField   = 23, ///< `b` A bit field of num bits
     
     YYEncodingTypeQualifierMask   = 0xFF00,   ///< mask of qualifier
-    YYEncodingTypeQualifierConst  = 1 << 8,  ///< const
-    YYEncodingTypeQualifierIn     = 1 << 9,  ///< in
-    YYEncodingTypeQualifierInout  = 1 << 10, ///< inout
-    YYEncodingTypeQualifierOut    = 1 << 11, ///< out
-    YYEncodingTypeQualifierBycopy = 1 << 12, ///< bycopy
-    YYEncodingTypeQualifierByref  = 1 << 13, ///< byref
-    YYEncodingTypeQualifierOneway = 1 << 14, ///< oneway
+    YYEncodingTypeQualifierConst  = 1 << 8,  ///< `r` const
+    YYEncodingTypeQualifierIn     = 1 << 9,  ///< `n` in
+    YYEncodingTypeQualifierInout  = 1 << 10, ///< `N` inout
+    YYEncodingTypeQualifierOut    = 1 << 11, ///< `o` out
+    YYEncodingTypeQualifierBycopy = 1 << 12, ///< `O` bycopy
+    YYEncodingTypeQualifierByref  = 1 << 13, ///< `R` byref
+    YYEncodingTypeQualifierOneway = 1 << 14, ///< `V` oneway
     
     YYEncodingTypePropertyMask         = 0xFF0000, ///< mask of property
-    YYEncodingTypePropertyReadonly     = 1 << 16, ///< readonly
-    YYEncodingTypePropertyCopy         = 1 << 17, ///< copy
-    YYEncodingTypePropertyRetain       = 1 << 18, ///< retain
-    YYEncodingTypePropertyNonatomic    = 1 << 19, ///< nonatomic
-    YYEncodingTypePropertyWeak         = 1 << 20, ///< weak
-    YYEncodingTypePropertyCustomGetter = 1 << 21, ///< getter=
-    YYEncodingTypePropertyCustomSetter = 1 << 22, ///< setter=
-    YYEncodingTypePropertyDynamic      = 1 << 23, ///< @dynamic
+    YYEncodingTypePropertyReadonly     = 1 << 16, ///< `R` readonly
+    YYEncodingTypePropertyCopy         = 1 << 17, ///< `C` copy
+    YYEncodingTypePropertyRetain       = 1 << 18, ///< `&` retain
+    YYEncodingTypePropertyNonatomic    = 1 << 19, ///< `N` nonatomic
+    YYEncodingTypePropertyWeak         = 1 << 20, ///< `W` weak
+    YYEncodingTypePropertyCustomGetter = 1 << 21, ///< `G` getter=
+    YYEncodingTypePropertyCustomSetter = 1 << 22, ///< `S` setter=
+    YYEncodingTypePropertyDynamic      = 1 << 23, ///< `D` @dynamic
 };
 
 /**

@@ -33,6 +33,17 @@ typedef NS_ENUM (NSUInteger, YYEncodingNSType) {
     YYEncodingTypeNSMutableDictionary,
     YYEncodingTypeNSSet,
     YYEncodingTypeNSMutableSet,
+    /**
+    YYEncodingTypeNSIndexPath,
+    YYEncodingTypeNSIndexSet,
+    YYEncodingTypeNSMutableIndexSet,
+    YYEncodingTypeNSOrderedSet,
+    YYEncodingTypeNSMutableOrderedSet,
+    YYEncodingTypeNSURLRequest,
+    YYEncodingTypeNSMutableURLRequest,
+    YYEncodingTypeNSCharacterSet,
+    YYEncodingTypeNSMutableCharacterSet,
+    */
 };
 
 /// Get the Foundation class type from property info.
@@ -53,6 +64,17 @@ static force_inline YYEncodingNSType YYClassGetNSType(Class cls) {
     if ([cls isSubclassOfClass:[NSDictionary class]]) return YYEncodingTypeNSDictionary;
     if ([cls isSubclassOfClass:[NSMutableSet class]]) return YYEncodingTypeNSMutableSet;
     if ([cls isSubclassOfClass:[NSSet class]]) return YYEncodingTypeNSSet;
+    /**
+    if ([cls isSubclassOfClass:[NSIndexPath class]]) return YYEncodingTypeNSIndexPath;
+    if ([cls isSubclassOfClass:[NSMutableIndexSet class]]) return YYEncodingTypeNSMutableIndexSet;
+    if ([cls isSubclassOfClass:[NSIndexSet class]]) return YYEncodingTypeNSIndexSet;
+    if ([cls isSubclassOfClass:[NSMutableOrderedSet class]]) return YYEncodingTypeNSMutableOrderedSet;
+    if ([cls isSubclassOfClass:[NSOrderedSet class]]) return YYEncodingTypeNSOrderedSet;
+    if ([cls isSubclassOfClass:[NSMutableURLRequest class]]) return YYEncodingTypeNSMutableURLRequest;
+    if ([cls isSubclassOfClass:[NSURLRequest class]]) return YYEncodingTypeNSURLRequest;
+    if ([cls isSubclassOfClass:[NSMutableCharacterSet class]]) return YYEncodingTypeNSMutableCharacterSet;
+    if ([cls isSubclassOfClass:[NSCharacterSet class]]) return YYEncodingTypeNSCharacterSet;
+    */
     return YYEncodingTypeNSUnknown;
 }
 
